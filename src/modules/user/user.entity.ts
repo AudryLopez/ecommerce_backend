@@ -12,10 +12,10 @@ export class User extends BaseEntity {
   password: string;
 
   @Column({ type: 'varchar' })
-  last_name: string;
+  first_name: string;
 
   @Column({ type: 'varchar' })
-  first_name: string;
+  last_name: string;
 
   @Column({ type: 'varchar' })
   address: string;

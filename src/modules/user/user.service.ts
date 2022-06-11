@@ -10,6 +10,7 @@ export class UserService {
   constructor(
     @InjectRepository(UserRepository)
     private readonly _userRepository: UserRepository,
+    @InjectRepository(User)
     private readonly _user: User,
   ) {}
   async createUser(createUserDto: CreateUserDto) {
@@ -24,8 +25,14 @@ export class UserService {
     return users;
   }
 
-  async findUser(id: number) {
+  async findUserById(id: number) {
     const user = await this._userRepository.findOne(id);
+    if (!user) throw new BadRequestException();
+    return user;
+  }
+
+  async findUser(username: string) {
+    const user = await this._userRepository.findOne({ username: username });
     if (!user) throw new BadRequestException();
     return user;
   }
